@@ -5,7 +5,7 @@ import { VideoPlayer } from './VideoPlayer';
 import { Playlist, PlaylistVideo } from '../types/playlist';
 import axios from 'axios';
 
-const API_KEY = 'AIzaSyCYuOdJH_Zixu-noJe5qx1t6J49vwVLioM'; // 🔁 Replace with your actual API key
+const API_KEY = 'AIzaSyCYuOdJH_Zixu-noJe5qx1t6J49vwVLioM';
 
 const fetchVideoDetails = async (videoIds: string[]): Promise<PlaylistVideo[]> => {
   const url = 'https://www.googleapis.com/youtube/v3/videos';
@@ -13,8 +13,8 @@ const fetchVideoDetails = async (videoIds: string[]): Promise<PlaylistVideo[]> =
     params: {
       part: 'snippet,contentDetails',
       id: videoIds.join(','),
-      key: API_KEY
-    }
+      key: API_KEY,
+    },
   });
 
   return data.items.map((item: any) => ({
@@ -23,7 +23,7 @@ const fetchVideoDetails = async (videoIds: string[]): Promise<PlaylistVideo[]> =
     channelTitle: item.snippet.channelTitle,
     thumbnail: item.snippet.thumbnails.medium.url,
     duration: parseYouTubeDuration(item.contentDetails.duration),
-    publishedAt: item.snippet.publishedAt
+    publishedAt: item.snippet.publishedAt,
   }));
 };
 
@@ -64,8 +64,47 @@ export const PlaylistManager: React.FC = () => {
           id: 'qa-manual-to-auto',
           name: 'QA Transition: Manual to Automation',
           videos: ['LeCCxglhYBE', 'o87ulyZj-yI', '2-X0oJ6sFc0', 'HE9RUN2W0qg', '8a7cX24NUJg']
+        },
+        {
+          id: 'non-it-to-dev',
+          name: 'Developer Transition: Non-IT to Developer',
+          videos: ['3fAYdlTyPWU', '9q-2bstk0yA', 'Sy12vViOoAk', 'cyZRLEg0los', 'gWe2f63sF1k']
+        },
+        {
+          id: 'hike-journey',
+          name: 'Navigating your Hike% Journey',
+          videos: ['48eiTb-7DaQ', 'VcVnMIf2i_c', '__vSYQdZ9dQ', 'Al4Ih2ddYv8', 'zwHUnAq_VCE']
+        },
+        {
+          id: 'qa-non-it',
+          name: 'QA Transition: Non-IT to QA',
+          videos: ['BSZY0oNeMfo', 'nYlnH1thoAw', 'dJgk8sFh6EA', 'iK7eOmEV0_Q', 'Kb2JSpcYH7s']
+        },
+        {
+          id: 'qa-breakthrough',
+          name: 'QA Transition: Career Breakthrough',
+          videos: ['mgdMrPC-mtg', 'WiyrLdj32d0', '6PwUrP7n_Yw', 'ddhB1miqqw8']
+        },
+        {
+          id: 'career-path',
+          name: 'Accelerating your Career Path',
+          videos: ['xAacKtPrJ3g', 'bC37CholyUo', '_-gW48SJF2M', 'SaIv3kOJBi0', 'HIM0pFZkqqY']
+        },
+        {
+          id: 'student-insights',
+          name: 'Launchpad Student Insights',
+          videos: ['ck5d1SlWTAY', 'HphnBYS8TOw', 'K3sfoAtzOH0', 'tjSrXY7vNxM', 'riiPMk7J0ZM']
+        },
+        {
+          id: 'crio-voices',
+          name: 'Crio Voices',
+          videos: ['7kgneAX1AL8', 'UwyW6wN3QDM', 'D50HUpFZv9o', 'vWKDcNmA9V8', '9f9TASg8KJI']
+        },
+        {
+          id: 'alumni-network',
+          name: 'Crio Alumni Network',
+          videos: ['sqies9pRtyk', 'I1HW4_cf_BE', 'pJJZvW_3Lsw', '8IywHvFI5SY', 'WZ6vnwPCNLY']
         }
-        // ➕ Add more playlists as needed
       ];
 
       const enrichedPlaylists = await Promise.all(
