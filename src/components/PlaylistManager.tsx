@@ -5,7 +5,8 @@ import { VideoPlayer } from './VideoPlayer';
 import { Playlist, PlaylistVideo } from '../types/playlist';
 import axios from 'axios';
 
-const API_KEY = 'AIzaSyCYuOdJH_Zixu-noJe5qx1t6J49vwVLioM';
+const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
+
 
 const fetchVideoDetails = async (videoIds: string[]): Promise<PlaylistVideo[]> => {
   const url = 'https://www.googleapis.com/youtube/v3/videos';
