@@ -8,7 +8,9 @@ interface VideoPlayerProps {
 }
 
 const logEvent = (eventName: string, data: any) => {
-  console.log(`[Analytics] ${eventName}`, data);
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    (window as any).gtag('event', eventName, data);
+  }
 };
 
 export const VideoPlayer: React.FC<VideoPlayerProps> = ({ video }) => {
