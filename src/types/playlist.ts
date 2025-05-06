@@ -7,8 +7,12 @@ export interface PlaylistVideo {
   publishedAt?: string;
 }
 
-export interface Playlist {
+export interface PlaylistVideo {
   id: string;
-  name: string;
-  videos: PlaylistVideo[];
+  title: string;
+  channelTitle?: string;
+  thumbnail?: string;
+  duration?: number;
+  publishedAt?: string;
+  playlistName?: string;
 }

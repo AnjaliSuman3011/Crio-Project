@@ -27,15 +27,33 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ video }) => {
     const currentTime = playerState.player?.getCurrentTime?.() || 0;
 
     switch (state) {
-      case 1:
-        logEvent("video_started", { videoId: video.id });
+      case 1: // Playing
+        logEvent("video_started", {
+          videoId: video.id,
+          videoTitle: video.title,
+          channelTitle: video.channelTitle,
+          playlistName: video.playlistName || 'Unknown',
+        });
         setStartTime(Date.now());
         break;
-      case 2:
-        logEvent("video_paused", { videoId: video.id, pausedAt: currentTime });
+
+      case 2: // Paused
+        logEvent("video_paused", {
+          videoId: video.id,
+          videoTitle: video.title,
+          channelTitle: video.channelTitle,
+          playlistName: video.playlistName || 'Unknown',
+          pausedAt: currentTime,
+        });
         break;
-      case 0:
-        logEvent("video_completed", { videoId: video.id });
+
+      case 0: // Ended
+        logEvent("video_completed", {
+          videoId: video.id,
+          videoTitle: video.title,
+          channelTitle: video.channelTitle,
+          playlistName: video.playlistName || 'Unknown',
+        });
         break;
     }
   };
@@ -83,6 +101,9 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({ video }) => {
         const videoTime = playerState.player.getCurrentTime?.();
         logEvent("video_watch_duration", {
           videoId: video.id,
+          videoTitle: video.title,
+          channelTitle: video.channelTitle,
+          playlistName: video.playlistName || 'Unknown',
           secondsWatched: watchedSeconds,
           lastKnownTimestamp: videoTime,
         });
