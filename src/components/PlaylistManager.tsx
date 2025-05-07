@@ -7,7 +7,6 @@ import axios from 'axios';
 
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 
-
 const fetchVideoDetails = async (videoIds: string[]): Promise<PlaylistVideo[]> => {
   const url = 'https://www.googleapis.com/youtube/v3/videos';
   const { data } = await axios.get(url, {
@@ -42,15 +41,6 @@ export const PlaylistManager: React.FC = () => {
   const [selectedVideo, setSelectedVideo] = useState<PlaylistVideo | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleSelectPlaylist = (playlist: Playlist) => {
-    setSelectedPlaylist(playlist);
-    setSelectedVideo(null);
-  };
-
-  const handleSelectVideo = (video: PlaylistVideo) => {
-    setSelectedVideo(video);
-  };
-
   useEffect(() => {
     const loadPlaylists = async () => {
       setLoading(true);
@@ -66,14 +56,7 @@ export const PlaylistManager: React.FC = () => {
           name: 'Developer Transition: Fresher to Full-Fledged Developer',
           videos: [
             '1RUTJ12S4DY', 'g5WfP3M7TZs', 'NkTastmzvBU', 'PW-ly0xfkzc', 'vrcmigsgUdI',
-            '0JVhFB_O2no', 'J8CU7w7bcXY', '5CSdftluKnM', 'qAeF6buZAPY', 'cVlpxwPUi18',
-            'eVWV3fvwAwI', 'cFp44AYZu60', 'ouvsa3FVlyM', 'ueyOceyEo-g', '8GgkbyYPino',
-            '0BBxbIDHhec', '1-LkMrlIRtQ', 'I86wEz1rfBI', 'Vn2QTEg6Weg', 'McOW7OlWJ1I',
-            'ekokOp4QPuw', '_O6pXnvhC4U', 'mbbi_UvKNr0', 'hd3BOH8IiRs', 'Z5bOL7F7kec',
-            'xEthwzqrsGE', 'x97GK1S_B6E', 'dPSlVmcm56k', '-h_eCH6Qtgo', 'BZI9J9JCwYc',
-            '9B7thgt9YL8', '5c7RAM4B4wA', '4eVrUVxGTQg', 'mlp4CLI3aYw', 'gT0QDbCjslw',
-            'GYKI9SuNZyU', 'EuDiXLrOGP4', 'JW1_03iaKLs', 'MoEohM6Q-j4', 'ZCDxIgQDclM',
-            'pURrEtX7JdA', 'tBMlZBgCfx8', 'HJvG-oxVrxY', 'uwyMnDa4cvI', '6_WkQ650CBQ', 'WPjzTvaozvo'
+            '0JVhFB_O2no', 'J8CU7w7bcXY', '5CSdftluKnM', 'qAeF6buZAPY', 'cVlpxwPUi18'
           ]
         },
         {
@@ -123,59 +106,81 @@ export const PlaylistManager: React.FC = () => {
         }
       ];
 
-      const enrichedPlaylists = await Promise.all(
-        rawPlaylists.map(async (pl) => {
-          const videoDetails = await fetchVideoDetails(pl.videos);
-          return { id: pl.id, name: pl.name, videos: videoDetails };
-        })
-      );
+      try {
+        const enrichedPlaylists = await Promise.all(
+          rawPlaylists.map(async (pl) => {
+            const videoDetails = await fetchVideoDetails(pl.videos);
+            return { id: pl.id, name: pl.name, videos: videoDetails };
+          })
+        );
 
-      setPlaylists(enrichedPlaylists);
-      setLoading(false);
+        setPlaylists(enrichedPlaylists);
+
+        // Automatically select the first playlist and its second video
+        if (enrichedPlaylists.length > 0) {
+          const firstPlaylist = enrichedPlaylists[0];
+          setSelectedPlaylist(firstPlaylist);
+
+          // Select the second video if available
+          if (firstPlaylist.videos.length > 1) {
+            setSelectedVideo(firstPlaylist.videos[1]);
+          }
+        }
+      } catch (error) {
+        console.error("Error loading playlists:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     loadPlaylists();
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto p-4 bg-[#F4F6F8]">
-      {loading ? (
-        <div className="flex justify-center items-center min-h-[50vh]">
-          <p className="text-gray-600 text-lg">Loading playlist...</p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="order-2 lg:order-1 flex flex-col space-y-6">
-            <div className="bg-[#B9F5D8] rounded-xl shadow-md p-4">
-              <PlaylistSearch 
-                playlists={playlists} 
-                onSelectPlaylist={handleSelectPlaylist}
-                selectedPlaylist={selectedPlaylist}
-              />
-            </div>
-            <div className="bg-white rounded-xl shadow-md flex-grow overflow-hidden">
-              <PlaylistContent 
-                playlist={selectedPlaylist} 
-                onSelectVideo={handleSelectVideo}
-                selectedVideo={selectedVideo}
-              />
-            </div>
+    
+      <div className="max-w-7xl mx-auto p-4 bg-[#F4F6F8]">
+        {loading ? (
+          <div className="flex justify-center items-center min-h-[50vh]">
+            <p className="text-gray-600 text-lg">Loading playlist...</p>
           </div>
-
-          <div className="order-1 lg:order-2 bg-[#004E45] rounded-xl shadow-md overflow-hidden text-white transition-all duration-300 h-full">
-            {selectedVideo ? (
-              <VideoPlayer video={selectedVideo} />
-            ) : (
-              <div className="flex items-center justify-center h-full p-8 text-center text-white">
-                <div>
-                  <p className="text-xl font-medium mb-2">No video selected</p>
-                  <p>Select a playlist and choose a video to play</p>
-                </div>
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[80vh]">
+            
+            {/* Playlist section */}
+            <div className="order-2 lg:order-1 flex flex-col space-y-6 overflow-y-auto">
+              <div className="bg-[#B9F5D8] rounded-xl shadow-md p-4">
+                <PlaylistSearch 
+                  playlists={playlists} 
+                  onSelectPlaylist={setSelectedPlaylist} 
+                  selectedPlaylist={selectedPlaylist} 
+                />
               </div>
-            )}
+              <div className="bg-white rounded-xl shadow-md flex-grow overflow-y-auto">
+                <PlaylistContent 
+                  playlist={selectedPlaylist} 
+                  onSelectVideo={setSelectedVideo} 
+                  selectedVideo={selectedVideo} 
+                />
+              </div>
+            </div>
+    
+            {/* Video player section */}
+            <div className="order-1 lg:order-2 bg-[#004E45] rounded-xl shadow-md overflow-hidden text-white h-full">
+              {selectedVideo ? (
+                <VideoPlayer video={selectedVideo} />
+              ) : (
+                <div className="flex items-center justify-center h-full p-8 text-center text-white">
+                  <div>
+                    <p className="text-xl font-medium mb-2">No video selected</p>
+                    <p>Select a playlist and choose a video to play</p>
+                  </div>
+                </div>
+              )}
+            </div>
+    
           </div>
-        </div>
-      )}
-    </div>
-  );
+        )}
+      </div>
+    );
+  
 };
