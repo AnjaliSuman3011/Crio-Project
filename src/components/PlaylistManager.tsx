@@ -62,6 +62,21 @@ export const PlaylistManager: React.FC = () => {
           videos: ['awCL6LGcnLE', '4Py73BESagg', '3Dm-L-y-qLQ', 'TO-EhZr2R40', 'JSKraCKuwoU']
         },
         {
+          id: 'fresher-to-full-fledged-developer',
+          name: 'Developer Transition: Fresher to Full-Fledged Developer',
+          videos: [
+            '1RUTJ12S4DY', 'g5WfP3M7TZs', 'NkTastmzvBU', 'PW-ly0xfkzc', 'vrcmigsgUdI',
+            '0JVhFB_O2no', 'J8CU7w7bcXY', '5CSdftluKnM', 'qAeF6buZAPY', 'cVlpxwPUi18',
+            'eVWV3fvwAwI', 'cFp44AYZu60', 'ouvsa3FVlyM', 'ueyOceyEo-g', '8GgkbyYPino',
+            '0BBxbIDHhec', '1-LkMrlIRtQ', 'I86wEz1rfBI', 'Vn2QTEg6Weg', 'McOW7OlWJ1I',
+            'ekokOp4QPuw', '_O6pXnvhC4U', 'mbbi_UvKNr0', 'hd3BOH8IiRs', 'Z5bOL7F7kec',
+            'xEthwzqrsGE', 'x97GK1S_B6E', 'dPSlVmcm56k', '-h_eCH6Qtgo', 'BZI9J9JCwYc',
+            '9B7thgt9YL8', '5c7RAM4B4wA', '4eVrUVxGTQg', 'mlp4CLI3aYw', 'gT0QDbCjslw',
+            'GYKI9SuNZyU', 'EuDiXLrOGP4', 'JW1_03iaKLs', 'MoEohM6Q-j4', 'ZCDxIgQDclM',
+            'pURrEtX7JdA', 'tBMlZBgCfx8', 'HJvG-oxVrxY', 'uwyMnDa4cvI', '6_WkQ650CBQ', 'WPjzTvaozvo'
+          ]
+        },
+        {
           id: 'qa-manual-to-auto',
           name: 'QA Transition: Manual to Automation',
           videos: ['LeCCxglhYBE', 'o87ulyZj-yI', '2-X0oJ6sFc0', 'HE9RUN2W0qg', '8a7cX24NUJg']
