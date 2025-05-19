@@ -55,8 +55,16 @@ export const PlaylistManager: React.FC = () => {
           id: 'fresher-to-full-fledged-developer',
           name: 'Developer Transition: Fresher to Full-Fledged Developer',
           videos: [
-            '1RUTJ12S4DY', 'g5WfP3M7TZs', 'NkTastmzvBU', 'PW-ly0xfkzc', 'vrcmigsgUdI',
-            '0JVhFB_O2no', 'J8CU7w7bcXY', '5CSdftluKnM', 'qAeF6buZAPY', 'cVlpxwPUi18'
+            '1RUTJ12S4DY',
+        'g5WfP3M7TZs',
+        'NkTastmzvBU',
+        'PW-ly0xfkzc',
+        'vrcmigsgUdI',
+        '0JVhFB_O2no',
+        'J8CU7w7bcXY',
+        '5CSdftluKnM',
+        'qAeF6buZAPY',
+        'cVlpxwPUi18'
           ]
         },
         {
@@ -67,7 +75,16 @@ export const PlaylistManager: React.FC = () => {
         {
           id: 'non-it-to-dev',
           name: 'Developer Transition: Non-IT to Developer',
-          videos: ['3fAYdlTyPWU', '9q-2bstk0yA', 'Sy12vViOoAk', 'cyZRLEg0los', 'gWe2f63sF1k']
+          videos: ['3fAYdlTyPWU',
+        '9q-2bstk0yA',
+        'Sy12vViOoAk',
+        'cyZRLEg0los',
+        'gWe2f63sF1k',
+        'Xi_G50Ffkfk',
+        'jM4ly9JmLwQ',
+        '7dqv1Z_Zizs',
+        'U6xIwnoX3vQ',
+        '52hLt1BY-c0']
         },
         {
           id: 'hike-journey',
@@ -92,7 +109,30 @@ export const PlaylistManager: React.FC = () => {
         {
           id: 'student-insights',
           name: 'Launchpad Student Insights',
-          videos: ['ck5d1SlWTAY', 'HphnBYS8TOw', 'K3sfoAtzOH0', 'tjSrXY7vNxM', 'riiPMk7J0ZM']
+          videos: [
+    'HphnBYS8TOw',
+    'K3sfoAtzOH0',
+    'tjSrXY7vNxM',
+    'riiPMk7J0ZM',
+    'lHqYZP7QKwc',
+    'ml9Y0mOPtVI',
+    'divjSJXSC0s',
+    'pd8nMVgslOk',
+    'bc0VfUfUwuY',
+    'XVXtjehcS2g',
+    'xaFHLkNeQIQ',
+    'SUcdfiz703o',
+    'U8iTf7Y2ZDM',
+    '_F3P3CjzwMw',
+    '5ZqvOEBvCvk',
+    'RHlm8PwcLaU',
+    '7N0_b1NXbc0',
+    'Q_XAutdVZ0Y',
+    'CF06c7xL0Xo',
+    'ctwHyesX0tE',
+    'fKhyc_D3nsY',
+    '942sD_3-qAM',
+    'Bmq-S3DvChU']
         },
         {
           id: 'crio-voices',
